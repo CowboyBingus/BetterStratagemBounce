@@ -4,7 +4,9 @@
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away, including solid ground outside the game's navigation mesh.
 
-[Download Better Stratagem Bounce](https://github.com/CowboyBingus/BetterStratagemBounce/releases/download/archive-v12/BetterStratagemBounce.zip), import the ZIP into **HDArsenal**, and enable it with the game closed. Disable or remove it through Arsenal. Remove any older manual installation before switching to the manager.
+[Download Better Stratagem Bounce](https://github.com/CowboyBingus/BetterStratagemBounce/releases/download/archive-v12/BetterStratagemBounce.zip), import the ZIP into **HDArsenal** or **HD2MM**, then enable and deploy it with the game closed. Use one manager for the installation. Remove any older manual installation before switching to a manager.
+
+If an earlier HD2MM import reported empty options, remove that entry from its library and import the corrected ZIP again. Import, deployment and removal are verified with the HDArsenal 0.36.0 and HD2MM 1.3.0.1 backends in isolated folders.
 
 The native slope limit remains: sufficiently steep surfaces and vertical walls still reject the ball. Sticking does not guarantee that every payload can land in every location.
 

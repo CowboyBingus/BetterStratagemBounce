@@ -1,4 +1,4 @@
-"""Verify the release ZIP, including HDArsenal's archive option and artwork."""
+"""Verify the release ZIP, including its manager manifest and artwork."""
 import hashlib
 import json
 from pathlib import Path
@@ -18,8 +18,10 @@ def main():
         assert set(payloads) == expected and len(package.namelist()) == len(expected)
         assert not any(name.lower().endswith(('.dll', '.exe', '.lua', '.ps1')) for name in payloads)
         manifest = json.loads(payloads['manifest.json'])
+        assert manifest.get('Version') == 1, 'HD2MM requires an explicit V1 manifest'
         assert manifest['Name'] == 'Better Stratagem Bounce'
-        assert manifest['Options'] == [{'Name': 'Better Stratagem Bounce', 'Include': ['data'], 'Image': 'thumbnail.png'}]
+        assert manifest['Options'] == [{'Name': 'Better Stratagem Bounce', 'Description': manifest['Description'],
+                                        'Include': ['data'], 'Image': 'thumbnail.png'}]
         assert manifest['IconPath'] == 'thumbnail.png'
         assert payloads['thumbnail.png'].startswith(b'\x89PNG\r\n\x1a\n')
         png, offset = payloads['thumbnail.png'], 8
@@ -50,7 +52,7 @@ def main():
             destination = Path(temporary) / 'An unrelated install location'
             package.extractall(destination)
             assert all((destination / name).read_bytes() == data for name, data in payloads.items())
-    print('PASS: archive contents, HDArsenal manifest, hashes, resource identity, privacy and relocation')
+    print('PASS: archive contents, V1 manager manifest, hashes, resource identity, privacy and relocation')
     print('6 package checks passed; ZIP contains three runtime archive files and no custom DLL.')
 
 

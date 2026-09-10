@@ -1,6 +1,6 @@
 # Build from source
 
-These instructions are for Windows x64 developers. Players only need the release ZIP and HDArsenal.
+These instructions are for Windows x64 developers. Players only need the release ZIP and HDArsenal or HD2MM.
 
 ## Dependencies
 

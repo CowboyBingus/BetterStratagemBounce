@@ -1,4 +1,4 @@
-"""Create a reproducible HDArsenal ZIP from verified build outputs."""
+"""Create a reproducible mod-manager ZIP from verified build outputs."""
 import hashlib
 import json
 from pathlib import Path
@@ -29,9 +29,10 @@ def package_release(root: Path, build: Path, report: dict) -> Path:
     }
     files[slug + '-manifest.json'] = (json.dumps(provenance, indent=2) + '\n').encode()
     files['manifest.json'] = (json.dumps({
-        'Guid': report['guid'], 'Name': report['name'], 'Description': report['description'],
+        'Version': 1, 'Guid': report['guid'], 'Name': report['name'], 'Description': report['description'],
         'IconPath': 'thumbnail.png',
-        'Options': [{'Name': report['name'], 'Include': ['data'], 'Image': 'thumbnail.png'}],
+        'Options': [{'Name': report['name'], 'Description': report['description'],
+                     'Include': ['data'], 'Image': 'thumbnail.png'}],
     }, indent=2) + '\n').encode()
     release = root / 'releases' / (slug + '.zip')
     release.parent.mkdir(exist_ok=True)
