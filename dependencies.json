@@ -1,0 +1,22 @@
+{
+  "dependencies": [
+    {
+      "name": "Filediver",
+      "path": "vendor/filediver",
+      "url": "https://github.com/xypwn/filediver.git",
+      "commit": "e2d0cae69335130430ad67f8f8308043d5eac053",
+      "license": "BSD-3-Clause",
+      "purpose": "Go archive, resource and schema tools",
+      "optional": false
+    },
+    {
+      "name": "LuaJIT",
+      "path": "tools/src/LuaJIT",
+      "url": "https://github.com/LuaJIT/LuaJIT.git",
+      "commit": "24c20c94e7db195b640854619577441f9b4bc6be",
+      "license": "MIT",
+      "purpose": "Compile the vanilla-preserving Lua loader in non-GC64 mode",
+      "optional": false
+    }
+  ]
+}

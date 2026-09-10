@@ -1,0 +1,9 @@
+Better Stratagem Bounce
+
+Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
+
+Install: Import BetterStratagemBounce.zip into HDArsenal and enable it with the game closed.
+Remove any previous manual installation before switching to Arsenal.
+Disable or remove it through Arsenal, then restart the game.
+
+Developed with assistance from GPT-6 Astra.
