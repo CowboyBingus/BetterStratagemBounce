@@ -35,15 +35,16 @@ def main():
             offset = end + 4
         assert offset == len(png)
         provenance = json.loads(payloads['BetterStratagemBounce-manifest.json'])
-        assert provenance['revision'] == 'archive-v13' and provenance['runtime_verified'] is False
+        assert provenance['revision'] == 'archive-v15' and provenance['runtime_verified'] is False
+        assert provenance['requires'] == [{'name': 'Bingus Shared Loader', 'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'api': 1}]
         for name, digest in provenance['files'].items():
             assert hashlib.sha256(payloads[name]).hexdigest().upper() == digest
         main = payloads['data/' + archive_name]
-        assert struct.unpack_from('<III', main) == (0xF0000011, 1, 2)
+        assert struct.unpack_from('<III', main) == (0xF0000011, 1, 1)
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
         from archive import resource_hash
-        entries = [struct.unpack_from('<7Q6I', main, 104 + index * 80) for index in range(2)]
-        assert {entry[0] for entry in entries} == {0x7251FDD9BB62480A, resource_hash('mods/cowboybingus/better_stratagem_bounce')}
+        entries = [struct.unpack_from('<7Q6I', main, 104 + index * 80) for index in range(1)]
+        assert {entry[0] for entry in entries} == {resource_hash('mods/cowboybingus/better_stratagem_bounce')}
         for index, entry in enumerate(entries):
             assert entry[1] == 0xA14E8DFA2CD117E2 and entry[-1] == index
             offset, size = entry[2], entry[7]

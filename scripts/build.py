@@ -4,15 +4,16 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+sys.dont_write_bytecode = True
 
 from archive import LUA, make_archive, sha, EXE_SHA, GAME_DLL_SHA, GAME, ARCHIVE, resource_hash
 from package import package_release
-from wwise import build_resources, verify_peer, CALLBACK_SHA, CALLBACK_NAME
+from module import build_module
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src'
 TESTS = ROOT / 'tests'
-REVISION = 'archive-v13'
+REVISION = 'archive-v15'
 INSPECTOR = Path(os.environ.get('HD2_PATCH_INSPECT', ROOT / 'tools/bin/hd2-patch-inspect.exe'))
 
 
@@ -29,18 +30,16 @@ def main():
     for relative, expected in [('bin/helldivers2.exe', EXE_SHA), ('data/game/game.dll', GAME_DLL_SHA)]:
         if sha((GAME / relative).read_bytes()) != expected:
             raise ValueError('Unsupported game build: ' + relative)
-    resources = build_resources(ROOT, build, 'mods/cowboybingus/better_stratagem_bounce',
+    resources = build_module(ROOT, build, 'mods/cowboybingus/better_stratagem_bounce',
                                 'navigation_patch.lua', REVISION)
     env = dict(os.environ, LUA_PATH=str(LUA.parent / '?.lua') + ';;')
     tests = run([LUA, TESTS / 'test_archive.lua', SOURCE, build / 'mod.ljbc', sha(LUA.read_bytes())], env=env)
-    tests += run([LUA, TESTS / 'test_shared_loader.lua', SOURCE, build], env=env)
     peer = os.environ.get('HD2_HELLPOD_SOURCE')
     peer_source = Path(peer).resolve() / 'src' if peer else None
     interop_tests = []
     if peer_source is not None:
         if not (peer_source / 'windows_api.lua').is_file():
             raise ValueError('HD2_HELLPOD_SOURCE must point to the Hellpod source repository')
-        verify_peer(ROOT, peer_source)
         for order in ('hellpod-ball', 'ball-hellpod'):
             interop_tests.append(run([LUA, TESTS / 'test_windows_interop.lua', SOURCE, peer_source,
                                       order, build / 'mod.ljbc', sha(LUA.read_bytes())], env=env))
@@ -51,11 +50,11 @@ def main():
     run([INSPECTOR, '--patch', build / ARCHIVE, '--out', build / 'archive-inspection.json',
          '--extract-dir', build / 'archive-resources'])
     inspection = json.loads((build / 'archive-inspection.json').read_text(encoding='utf-8'))
-    expected = {CALLBACK_NAME, resource_hash('mods/cowboybingus/better_stratagem_bounce')}
+    expected = {resource_hash('mods/cowboybingus/better_stratagem_bounce')}
     actual = {int(item['name']['hex'], 16) for item in inspection['resources']}
-    if inspection['num_files'] != 2 or actual != expected or any(
+    if inspection['num_files'] != 1 or actual != expected or any(
             item['type']['hex'] != '0xa14e8dfa2cd117e2' for item in inspection['resources']):
-        raise ValueError('Archive must contain only the coordinator and this mod')
+        raise ValueError('Archive must contain only this mod module')
     files = {f'data/{ARCHIVE}{suffix}': f'build/{ARCHIVE}{suffix}'
              for suffix in ('', '.stream', '.gpu_resources')}
     report = {
@@ -63,7 +62,6 @@ def main():
         'status': 'offline_verified_gameplay_pending', 'game_exe_sha256': EXE_SHA,
         'game_dll_sha256': GAME_DLL_SHA, 'deployment_files': files,
         'files': {path: sha((ROOT / path).read_bytes()) for path in files.values()},
-        'vanilla_callback_sha256': CALLBACK_SHA, 'vanilla_callbacks_embedded_unchanged': True,
         'custom_dlls': 0, 'encrypted_settings_changed': False, 'integrity_checks_changed': False,
         'executable_memory_changed': False,
         'patch': {'target': 'loaded StratagemInfo data', 'flag_offset': '0x170',
@@ -75,8 +73,8 @@ def main():
     report.update(name='Better Stratagem Bounce', slug='BetterStratagemBounce',
                   guid='b47a63e0-9559-4bfb-a856-c816425af1d0',
                   description='Lets stratagem balls stick and activate on more surfaces instead of bouncing away.')
-    report['shared_loader'] = {'version': 1, 'resource_sha256': sha(resources[CALLBACK_NAME]),
-                               'module': 'mods/cowboybingus/better_stratagem_bounce', 'boot_replaced': False}
+    report['requires'] = [{'name': 'Bingus Shared Loader', 'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'api': 1}]
+    report['description'] += ' Requires Bingus Shared Loader.'
     sources = list(SOURCE.glob('*.lua')) + list(TESTS.glob('*.lua')) + list((ROOT / 'scripts').glob('*.py'))
     report['source_sha256'] = {path.relative_to(ROOT).as_posix(): sha(path.read_bytes()) for path in sources}
     release = package_release(ROOT, build, report)

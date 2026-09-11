@@ -18,7 +18,9 @@ def package_release(root: Path, build: Path, report: dict) -> Path:
         files[destination] = data
     slug = report['slug']
     files[slug + '-README.txt'] = (root / 'INSTALL.txt').read_bytes()
-    files['thumbnail.png'] = (root / 'assets/thumbnail.png').read_bytes()
+    thumbnail = root / 'assets/thumbnail.png'
+    if thumbnail.is_file():
+        files['thumbnail.png'] = thumbnail.read_bytes()
     provenance = {
         'name': report['name'], 'revision': report['revision'],
         'steam_build': 24826606, 'exe_version': '1.8.45317.0',
@@ -27,13 +29,16 @@ def package_release(root: Path, build: Path, report: dict) -> Path:
         'runtime_verified': False,
         'files': {name: digest(data) for name, data in files.items()},
     }
+    for key in ('requires', 'provides'):
+        if key in report:
+            provenance[key] = report[key]
     files[slug + '-manifest.json'] = (json.dumps(provenance, indent=2) + '\n').encode()
-    files['manifest.json'] = (json.dumps({
-        'Version': 1, 'Guid': report['guid'], 'Name': report['name'], 'Description': report['description'],
-        'IconPath': 'thumbnail.png',
-        'Options': [{'Name': report['name'], 'Description': report['description'],
-                     'Include': ['data'], 'Image': 'thumbnail.png'}],
-    }, indent=2) + '\n').encode()
+    option = {'Name': report['name'], 'Description': report['description'], 'Include': ['data']}
+    manager = {'Version': 1, 'Guid': report['guid'], 'Name': report['name'],
+               'Description': report['description'], 'Options': [option]}
+    if thumbnail.is_file():
+        manager['IconPath'] = option['Image'] = 'thumbnail.png'
+    files['manifest.json'] = (json.dumps(manager, indent=2) + '\n').encode()
     release = root / 'releases' / (slug + '.zip')
     release.parent.mkdir(exist_ok=True)
     temporary = build / 'release.pending.zip'

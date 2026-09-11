@@ -2,17 +2,19 @@
 
 # Better Stratagem Bounce
 
+[Download archive-v15](https://github.com/CowboyBingus/BetterStratagemBounce/releases/tag/archive-v15) · [Required Bingus Shared Loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/tag/loader-v2)
+
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away, including solid ground outside the game's navigation mesh.
 
-[Download Better Stratagem Bounce](https://github.com/CowboyBingus/BetterStratagemBounce/releases/download/archive-v13/BetterStratagemBounce.zip), import the ZIP into **HDArsenal** or **HD2MM**, then enable and deploy it with the game closed. Use one manager for the installation. Remove any older manual installation before switching to a manager.
+**Install:** Close the game, import `BingusSharedLoader.zip` and `BetterStratagemBounce.zip` into **HDArsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
 
-This prerelease introduces the shared Wwise loader. Native startup and offline HUD+ startup checks pass; gameplay validation remains pending. Import, deployment and removal pass HDArsenal 0.36.0 and HD2MM 1.3.0.1 backend checks in isolated folders.
+This prerelease is **archive-v15**, for Steam build **24826606** / EXE **1.8.45317.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
 
-The native slope limit remains: sufficiently steep surfaces and vertical walls still reject the ball. Sticking does not guarantee that every payload can land in every location.
+Remove older packages with bundled loaders before deploying this candidate. This package requires Bingus Shared Loader loader-v2 / API 1. The loader was formerly named Shared Mod Loader; its manager GUID and API are unchanged. In-game validation of the packaging transition remains pending.
 
-The current prerelease is **archive-v13**, for Steam build **24826606** / EXE **1.8.45317.0**. Unsupported game binaries are rejected. This mod and [Hellpod Steering Unlocked](https://github.com/CowboyBingus/HellpodSteeringUnlocked) now use an identical Wwise coordinator with separate modules. Each works independently; when using both, update both packages together.
+The native slope limit remains about 45.57 degrees. Steep surfaces, vertical walls and undersides still reject the ball. Sticking does not guarantee that every payload can land in every location.
 
-Neither package replaces `boot`, avoiding the known HD2 HUD+ 0.1.3 startup conflict. Offline checks preserve its update chain. Other Wwise replacements still need coordination; see [compatibility](docs/COMPATIBILITY.md).
+The new gameplay packages and Bingus Shared Loader own distinct resources and do not overlap with each other. The loader preserves Wwise callbacks and does not replace `boot`, allowing the tested HD2 HUD+ 0.1.3 boot script to coexist. Another Wwise replacement can still conflict. See [compatibility](docs/COMPATIBILITY.md).
 
 ## Source
 
@@ -25,3 +27,5 @@ Neither package replaces `boot`, avoiding the known HD2 HUD+ 0.1.3 startup confl
 [Build from source](CONTRIBUTING.md) · [Technical walkthrough](docs/TECHNICAL.md) · [Third-party dependencies](THIRD_PARTY.md)
 
 **AI disclosure:** GPT-6 Astra was used for research, implementation, debugging, documentation and artwork.
+
+[Release notes](docs/RELEASE_NOTES.md) · [Artwork](assets/ARTWORK.md)

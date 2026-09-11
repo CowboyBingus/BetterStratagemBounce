@@ -2,12 +2,21 @@ Better Stratagem Bounce
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
 
-Install: With the game closed, import BetterStratagemBounce.zip into HDArsenal or HD2MM, then enable and deploy it.
-Use one manager for the installation.
-Remove any previous manual installation before switching to a manager.
-To update, remove the old library entry, purge deployment, import this ZIP and redeploy enabled mods.
-If using both Better Stratagem Bounce and Hellpod Steering Unlocked, update both together.
-These versions share the same loader; their mutual resource-overlap warning is expected.
-To uninstall, disable the mod, purge deployed files, and redeploy any other enabled mods through the same manager. Then remove its library entry.
+Requires Bingus Shared Loader. With the game closed, import BingusSharedLoader.zip and
+BetterStratagemBounce.zip into HDArsenal or HD2MM, then enable and deploy both.
+Use one manager. Keep the loader enabled; managers do not install it automatically.
+You do not need the other gameplay mods.
+
+To upgrade from an older package: remove its old library entry, purge deployment,
+import the current ZIP and Bingus Shared Loader, then redeploy. Replace all enabled
+older CowboyBingus packages that bundled the loader. Remove previous manual files
+before switching to a manager. Do not enable withdrawn native reinforcement prototypes.
+
+To uninstall, disable this mod, purge deployment, and redeploy the remaining mods.
+Remove Bingus Shared Loader only if no dependent mods remain enabled.
 
 Developed with assistance from GPT-6 Astra.
+
+Loader-v2 / API 1 is required. Bingus Shared Loader is the renamed Shared Mod
+Loader; its manager GUID is unchanged. Replace the old entry instead of enabling
+both names. Current Reinforcement Beacons Fixed is an optional separate module.
