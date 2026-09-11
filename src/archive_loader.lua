@@ -1,4 +1,7 @@
 return function(create_api, patch, build)
+    if _G.BetterStratagemBounce then return end
+    local state = {revision = build.revision, active = false, status = 'pending'}
+    _G.BetterStratagemBounce = state
     local original_update = update
     local attempted = false
     local callback
@@ -11,8 +14,7 @@ return function(create_api, patch, build)
             if file then file:write(build.revision .. '\n' .. message .. '\n'); file:close() end
         end)
     end
-    callback = function(dt, ...)
-        if original_update then original_update(dt, ...) end
+    local function initialize()
         if attempted then return end
         attempted = true
         local ok, result = pcall(function()
@@ -25,10 +27,18 @@ return function(create_api, patch, build)
             assert(applied, reason)
             return reason
         end)
-        _G.BetterStratagemBounce = {revision = build.revision, active = ok, status = tostring(result)}
+        state.active, state.status = ok, tostring(result)
         report(tostring(result))
-        -- No continuing update or shutdown hook is needed once the instruction is patched.
+        -- A later mod may still own the outer update callback.
         if update == callback then update = original_update or function() end end
+    end
+    local function forward(...)
+        initialize()
+        return ...
+    end
+    callback = function(dt, ...)
+        if original_update then return forward(original_update(dt, ...)) end
+        initialize()
     end
     update = callback
 end

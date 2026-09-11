@@ -5,7 +5,9 @@ Lets stratagem balls stick and activate on more surfaces instead of bouncing awa
 Install: With the game closed, import BetterStratagemBounce.zip into HDArsenal or HD2MM, then enable and deploy it.
 Use one manager for the installation.
 Remove any previous manual installation before switching to a manager.
-For an HD2MM "empty options" warning from an earlier ZIP, remove the old library entry and import this ZIP again.
+To update, remove the old library entry, purge deployment, import this ZIP and redeploy enabled mods.
+If using both Better Stratagem Bounce and Hellpod Steering Unlocked, update both together.
+These versions share the same loader; their mutual resource-overlap warning is expected.
 To uninstall, disable the mod, purge deployed files, and redeploy any other enabled mods through the same manager. Then remove its library entry.
 
 Developed with assistance from GPT-6 Astra.

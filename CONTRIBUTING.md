@@ -33,6 +33,7 @@ Use your own matching installation with the game closed. The builder verifies th
 ```powershell
 $env:HD2_GAME_ROOT = 'D:/SteamLibrary/steamapps/common/Helldivers 2'
 ./tools/bin/hd2-resource-extract.exe -game-dir $env:HD2_GAME_ROOT -name 0xf476df93691895fa -type 0xa14e8dfa2cd117e2 -out artifacts/vanilla/boot.lua.main
+./tools/bin/hd2-resource-extract.exe -game-dir $env:HD2_GAME_ROOT -name 0x7251fdd9bb62480a -type 0xa14e8dfa2cd117e2 -out artifacts/vanilla/wwise_flow_callbacks.lua.main
 ```
 
 The extraction tool reads the installation; it does not modify or deploy mods. Extracted files must match the vanilla hashes even if mods are installed.
@@ -52,9 +53,26 @@ Each repository builds independently. To include compatibility tests against the
 | `HD2_GAME_ROOT` | Standard Steam `common/Helldivers 2` directory |
 | `HD2_LUAJIT` | `tools/src/LuaJIT/src/luajit.exe` |
 | `HD2_BOOT_RESOURCE` | `artifacts/vanilla/boot.lua.main` |
+| `HD2_CALLBACK_RESOURCE` | `artifacts/vanilla/wwise_flow_callbacks.lua.main` |
 | `HD2_PATCH_INSPECT` | `tools/bin/hd2-patch-inspect.exe` |
 
 For the optional HDArsenal 0.36.0 backend check, install Node.js and set `HD2_ARSENAL_SOURCE` to an unpacked application containing `obfuscated_src/main` and its bundled `node_modules`. The check uses an isolated profile and filesystem, verifies the icon/description, import, deploy, disable, re-enable and removal. It does not change the live manager profile or game.
+
+## Shared loader verification
+
+Keep `src/shared_loader.lua`, `scripts/wwise.py` and `scripts/archive.py` identical across the two repositories. The optional peer-source build check rejects drift. The coordinator has a fixed version-1 module list; gameplay changes belong in the separate module. Changing the coordinator requires rebuilding and verifying both packages.
+
+After building both, run from either repository:
+
+```powershell
+python tests/test_shared_packages.py <Bounce-ZIP> <Hellpod-ZIP>
+```
+
+For the optional HUD+ 0.1.3 test, supply privately extracted Lua resources from that package; do not commit them. The harness runs unmodified HUD+ bytecode in an isolated Lua environment and rejects the non-game host for both memory patches:
+
+```powershell
+./tools/src/LuaJIT/src/luajit.exe tests/test_hud_compatibility.lua <Bounce-build-folder> <Hellpod-build-folder> <HUD-resources-folder>
+```
 
 ## Maintaining the mod
 

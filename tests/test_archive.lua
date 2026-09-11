@@ -163,15 +163,15 @@ for _, mode in ipairs({'success', 'ffi', 'exe', 'game', 'missing', 'patch'}) do
 end
 pass('loader preserves updates, verifies both modules, contains failures and removes its update hook')
 
-local env = setmetatable({stingray = {Application = {build = function() return 'release' end}},
-    require = function(name) assert(name == 'core/wwise/lua/wwise_flow_callbacks') end}, {__index = _G})
+local env = setmetatable({print = function() end, os = {getenv = function() end},
+    update = function() return 1, nil, 3 end}, {__index = _G})
 env._G = env
-env.loadstring = function(bytes, name)
-    local func, message = loadstring(bytes, name)
-    if func then setfenv(func, env) end
-    return func, message
-end
 setfenv(assert(loadfile(compiled)), env)()
-assert(type(env.update) == 'function' and type(env.init) == 'function')
-pass('compiled archive embeds and executes the unchanged vanilla boot bytecode')
+local first = env.update
+setfenv(assert(loadfile(compiled)), env)()
+assert(env.update == first and env.BetterStratagemBounce.status == 'pending')
+local a, b, c = env.update(0.1)
+assert(a == 1 and b == nil and c == 3 and select('#', env.update(0.1)) == 3)
+assert(env.BetterStratagemBounce.active == false)
+pass('compiled module initializes once, preserves update returns and rejects the non-game host')
 print(cases .. ' runtime checks passed; no game process was accessed.')

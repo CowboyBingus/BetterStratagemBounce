@@ -14,7 +14,7 @@ The earlier normal-Z comparison against `0.7` remains, so the native contact lim
 
 ## Startup and lifecycle
 
-`scripts/build.py` verifies the original `boot` resource and embeds its bytecode unchanged before the three runtime modules. LuaJIT compiles the wrapper with debug information stripped. The archive replaces Lua resource `f476df93691895fa`, type `a14e8dfa2cd117e2`.
+`scripts/wwise.py` embeds the original Wwise callback bytecode unchanged ahead of `src/shared_loader.lua`. The archive contains this shared resource (`7251fdd9bb62480a`) and one uniquely named mod module, both Lua type `a14e8dfa2cd117e2`. The module contains the Windows adapter, gameplay patch and lifecycle loader. It replaces no `boot` resource. The coordinator checks availability before requiring either mod, and both packages carry identical coordinator bytes. See [startup compatibility](COMPATIBILITY.md).
 
 `src/archive_loader.lua` verifies both game-module SHA256 values, applies the settings change on the first update and removes its wrapper when it still owns that callback. It preserves an existing callback chain and installs no shutdown callback. The process owns the changed memory; removing the archive prevents the edit on the next launch.
 
@@ -22,10 +22,10 @@ The game reads the underlying stratagem settings through a separate loose-file l
 
 ## Tests and evidence
 
-The runtime suite uses synthetic allocations to verify layout rejection, memory permissions, the exact 101-bit scope, partial-write recovery and callback behavior. It also executes the compiled wrapper to check preservation of the original boot code. Package checks verify the archive identity, payload hashes, Arsenal manifest, artwork and relocation.
+The runtime suite uses synthetic allocations to verify layout rejection, memory permissions, the exact 101-bit scope, partial-write recovery and callback behavior. It executes the compiled coordinator to compare original audio callbacks and test all module-presence combinations. Package checks verify the archive identity, payload hashes, Arsenal manifest, artwork and relocation.
 
 With `HD2_HELLPOD_SOURCE` set, fresh LuaJIT processes test both actual Windows adapters in both initialization orders. Their FFI declarations share one VM; explicit `void *` handling avoids conflicting structure-pointer declarations. No peer source is required for a standalone build.
 
-The user has reported the two mods working together. Remaining validation must distinguish first-impact sticking, native slope rejection, payload clearance, jammer/cooldown behavior and host/client ownership. Offline success establishes code and package properties, not all gameplay outcomes.
+The new coordinator loaded both modules successfully in a native startup-only check; gameplay testing of this route remains pending. Remaining validation must distinguish first-impact sticking, native slope rejection, payload clearance, jammer/cooldown behavior and host/client ownership. Offline success establishes code and package properties, not all gameplay outcomes.
 
-Both module fingerprints and vanilla resource fingerprints are in `scripts/archive.py`; the native layout and expected flags are in `src/navigation_patch.lua`. They must be revalidated together when the game updates.
+Module and boot fingerprints are in `scripts/archive.py`; the Wwise fingerprint is in `scripts/wwise.py`; the native layout and expected flags are in `src/navigation_patch.lua`. They must be revalidated together when the game updates.
