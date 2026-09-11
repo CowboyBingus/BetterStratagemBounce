@@ -4,6 +4,8 @@
 
 > [!IMPORTANT]
 > **Bingus Shared Loader is now a separate required download.** [Download the latest loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/latest), import `BingusSharedLoader.zip` into Arsenal or HD2MM, and enable it alongside Better Stratagem Bounce before deploying. **This mod will not activate without the loader.** Mod managers do not install it automatically.
+>
+> **Arsenal (default priority): place Bingus Shared Loader LAST, at the bottom of the load order**, then **Purge → Deploy**. If you enabled first-mod priority, place the loader first instead.
 
 [Download archive-v15](https://github.com/CowboyBingus/BetterStratagemBounce/releases/tag/archive-v15)
 
