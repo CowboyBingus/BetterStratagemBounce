@@ -36,7 +36,7 @@ The builder verifies the supported EXE and game.dll hashes before compiling. Set
 python -B scripts/build.py
 ```
 
-The builder compiles Lua, runs the runtime checks in synthetic local allocations, inspects the archive and checks the final ZIP. It writes `releases/BetterStratagemBounce.zip`; intermediates, results and SHA256 are in `build/`. It never installs or launches the game.
+The builder compiles Lua, runs the runtime checks in synthetic local allocations, inspects the archive and checks the final ZIP. It writes `releases/Better-Stratagem-Bounce-v15.zip`; intermediates, results and SHA256 are in `build/`. It never installs or launches the game.
 
 Each repository builds independently. To include compatibility tests against the other mod's actual source, set `HD2_HELLPOD_SOURCE` to that repository's absolute root and rebuild. A supplied but invalid peer path is rejected; omission is recorded as interoperability testing not run.
 

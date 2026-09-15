@@ -1,9 +1,9 @@
-Better Stratagem Bounce
+Better Stratagem Bounce - v15
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
 
-Requires Bingus Shared Loader. With the game closed, import BingusSharedLoader.zip and
-BetterStratagemBounce.zip into HDArsenal or HD2MM, then enable and deploy both.
+Requires Bingus Shared Loader. With the game closed, import Bingus-Shared-Loader-v9.zip and
+Better-Stratagem-Bounce-v15.zip into HDArsenal or HD2MM, then enable and deploy both.
 Use one manager. Keep the loader enabled; managers do not install it automatically.
 You do not need the other gameplay mods.
 
