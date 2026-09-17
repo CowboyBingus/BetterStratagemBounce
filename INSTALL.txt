@@ -1,22 +1,54 @@
-Better Stratagem Bounce - v15
+TEST BUILD: mission-mode and centralized-log corrections. In-game validation pending.
+
+Requires Bingus Shared Loader v14 for the shared log folder.
+
+Logs: %LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs
+
+
+
+Better Stratagem Bounce - v15.1
+
+
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
 
-Requires Bingus Shared Loader. With the game closed, import Bingus-Shared-Loader-v9.zip and
-Better-Stratagem-Bounce-v15.zip into HDArsenal or HD2MM, then enable and deploy both.
+
+
+Requires Bingus Shared Loader. With the game closed, import Bingus-Shared-Loader-v14.zip and
+
+Better-Stratagem-Bounce-v15.1.zip into HDArsenal or HD2MM, then enable and deploy both.
+
 Use one manager. Keep the loader enabled; managers do not install it automatically.
+
 You do not need the other gameplay mods.
 
+
+
 To upgrade from an older package: remove its old library entry, purge deployment,
+
 import the current ZIP and Bingus Shared Loader, then redeploy. Replace all enabled
+
 older CowboyBingus packages that bundled the loader. Remove previous manual files
+
 before switching to a manager. Do not enable withdrawn native reinforcement prototypes.
 
+
+
 To uninstall, disable this mod, purge deployment, and redeploy the remaining mods.
+
 Remove Bingus Shared Loader only if no dependent mods remain enabled.
+
+
 
 Developed with assistance from GPT-6 Astra.
 
+
+
 Loader-v2 / API 1 is required. Bingus Shared Loader is the renamed Shared Mod
+
 Loader; its manager GUID is unchanged. Replace the old entry instead of enabling
+
 both names. Current Reinforcement Beacons Fixed is an optional separate module.
+
+Logs: %LOCALAPPDATA%\CowboyBingus\Helldivers2\Logs
+Requires Bingus Shared Loader v14 or newer for this log folder.

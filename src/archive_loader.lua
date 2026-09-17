@@ -8,9 +8,8 @@ return function(create_api, patch, build)
     local function report(message)
         print('[BetterStratagemBounce] ' .. build.revision .. ': ' .. message)
         pcall(function()
-            local directory = os.getenv('LOCALAPPDATA')
-            if not directory then return end
-            local file = io.open(directory .. '/BetterStratagemBounce.log', 'w')
+            local logger=rawget(_G,'CowboyBingusModLoader')
+            local file=logger and logger.open_log and logger.open_log('BetterStratagemBounce.log')
             if file then file:write(build.revision .. '\n' .. message .. '\n'); file:close() end
         end)
     end

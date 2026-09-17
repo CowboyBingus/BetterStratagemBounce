@@ -13,7 +13,7 @@ from module import build_module
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src'
 TESTS = ROOT / 'tests'
-REVISION = 'archive-v15'
+REVISION = 'archive-v15.1'
 INSPECTOR = Path(os.environ.get('HD2_PATCH_INSPECT', ROOT / 'tools/bin/hd2-patch-inspect.exe'))
 
 
@@ -73,7 +73,7 @@ def main():
     report.update(name='Better Stratagem Bounce', slug='BetterStratagemBounce',
                   guid='b47a63e0-9559-4bfb-a856-c816425af1d0',
                   description='Lets stratagem balls stick and activate on more surfaces instead of bouncing away.')
-    report['requires'] = [{'name': 'Bingus Shared Loader', 'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'api': 1}]
+    report['requires'] = [{'name': 'Bingus Shared Loader', 'guid': '612eaf70-d682-43c7-9efd-16dcc695f977', 'api': 1, 'revision': 'loader-v14'}]
     report['description'] += ' Requires Bingus Shared Loader.'
     sources = list(SOURCE.glob('*.lua')) + list(TESTS.glob('*.lua')) + list((ROOT / 'scripts').glob('*.py'))
     report['source_sha256'] = {path.relative_to(ROOT).as_posix(): sha(path.read_bytes()) for path in sources}

@@ -3,7 +3,7 @@
 # Better Stratagem Bounce
 
 > [!IMPORTANT]
-> **Bingus Shared Loader is now a separate required download.** [Download the latest loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/latest), import `Bingus-Shared-Loader-v9.zip` into Arsenal or HD2MM, and enable it alongside Better Stratagem Bounce before deploying. **This mod will not activate without the loader.** Mod managers do not install it automatically.
+> **Bingus Shared Loader is now a separate required download.** [Download the latest loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/latest), import `Bingus-Shared-Loader-v14.zip` into Arsenal or HD2MM, and enable it alongside Better Stratagem Bounce before deploying. **This mod will not activate without the loader.** Mod managers do not install it automatically.
 >
 > **Arsenal (default priority): place Bingus Shared Loader LAST, at the bottom of the load order**, then **Purge → Deploy**. If you enabled first-mod priority, place the loader first instead.
 
@@ -11,7 +11,7 @@
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away, including solid ground outside the game's navigation mesh.
 
-**Install:** Close the game, import `Bingus-Shared-Loader-v9.zip` and `Better-Stratagem-Bounce-v15.zip` into **HDArsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
+**Install:** Close the game, import `Bingus-Shared-Loader-v14.zip` and `Better-Stratagem-Bounce-v15.1.zip` into **HDArsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
 
 This release is **archive-v15**, for Steam build **24826606** / EXE **1.8.45317.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
 
