@@ -37,13 +37,13 @@ assert(not api.write(api.module(nil), '\0'))
 assert(not api.writable_data(ffi.cast('void *', 1), 1))
 pass('adapter refuses executable, read-only, image and unmapped write targets')
 
-local module = allocate(patch.table_rva + 148 * 8)
+local module = allocate(patch.table_rva + 150 * 8)
 local data = allocate(patch.data_size)
 ffi.fill(data, patch.data_size, 0xA5)
 pointer(module + patch.buffer_rva, data)
 integer(data, 11)
-local group_sizes = {7204,1184,5860,5228,19152,7040,3832,17840,4884,1104,5964}
-local group_counts = {13,2,11,9,36,13,7,33,9,2,12}
+local group_sizes = {7204,1184,5860,5228,19152,7040,3832,18344,4884,1104,6444}
+local group_counts = {13,2,11,9,36,13,7,34,9,2,13}
 local offset, record_count, locations = 4, 0, {}
 for group, size in ipairs(group_sizes) do
     integer(data + offset, 0x444C444C)
@@ -56,7 +56,7 @@ for group, size in ipairs(group_sizes) do
     integer(data + offset + 32, group_counts[group])
     for index = 0, group_counts[group] - 1 do
         local record = offset + 40 + index * 400
-        local kind = (record_count * 5) % 147 + 1
+        local kind = (record_count * 5) % 149 + 1
         record_count = record_count + 1
         integer(data + record, kind)
         pointer(module + patch.table_rva + kind * 8, data + record)
@@ -65,9 +65,9 @@ for group, size in ipairs(group_sizes) do
     end
     offset = offset + size
 end
-assert(offset == patch.data_size and record_count == 147 and #patch.vanilla_flags == 147)
+assert(offset == patch.data_size and record_count == 149 and #patch.vanilla_flags == 149)
 local original = api.read(data, patch.data_size)
-local module_table = api.read(module + patch.table_rva, 148 * 8)
+local module_table = api.read(module + patch.table_rva, 150 * 8)
 assert(patch.apply(api, module))
 local expected = original
 local changed = 0
@@ -79,10 +79,10 @@ for kind, record in ipairs(locations) do
     expected = expected:sub(1, position) .. string.char(after) .. expected:sub(position + 2)
     if before ~= after then changed = changed + 1 end
 end
-assert(changed == 101 and api.read(data, patch.data_size) == expected)
-assert(api.read(module + patch.table_rva, 148 * 8) == module_table)
+assert(changed == 103 and api.read(data, patch.data_size) == expected)
+assert(api.read(module + patch.table_rva, 150 * 8) == module_table)
 assert(api.read(code, 4096) == code_before)
-pass('101 navigation bits change across 147 shuffled records; every other data and code byte survives')
+pass('103 navigation bits change across 149 shuffled records; every other data and code byte survives')
 
 local function reset()
     protect(data, patch.data_size, 4)
@@ -123,7 +123,7 @@ for _, failure in ipairs({'write', 'verify'}) do
     end
     local rejected = false
     faulty.read = function(address, size)
-        if failure == 'verify' and writes == 101 and address == data and size == patch.data_size and not rejected then
+        if failure == 'verify' and writes == 103 and address == data and size == patch.data_size and not rejected then
             rejected = true; return nil
         end
         return api.read(address, size)

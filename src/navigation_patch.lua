@@ -1,18 +1,19 @@
 local patch = {
-    buffer_rva = 0x2791F68,
-    table_rva = 0x2ACD110,
-    data_size = 79296,
+    buffer_rva = 0x348e8f8,
+    table_rva = 0x37cb600,
+    data_size = 80280,
     groups = 11,
     record_size = 400,
     flag_offset = 0x170,
     vanilla_flags = {
-        2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 3, 0, 2,
-        2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2, 2,
-        2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 0,
-        2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2, 3, 2,
-        2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2, 0, 0,
-        2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0, 2, 0,
-        2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 3, 2, 0, 0, 2, 0, 2
+        2, 2, 0, 0, 2, 2, 0, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 3, 0,
+        2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 1, 2, 1, 0, 2, 1, 0, 2,
+        2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 0, 2,
+        2, 0, 2, 2, 2, 3, 2, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 2, 3, 0, 2,
+        3, 2, 2, 0, 2, 3, 0, 2, 1, 0, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2,
+        0, 0, 2, 3, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 0, 0, 0, 0,
+        2, 0, 2, 2, 2, 0, 0, 2, 2, 0, 2, 0, 2, 0, 2, 2, 3, 2, 0, 0, 2,
+        0, 2
     }
 }
 
@@ -32,7 +33,7 @@ local function prepare(api, module)
     local buffer = assert(api.pointer(pointer_bytes), 'Settings buffer unavailable')
     assert(api.writable_data(buffer, patch.data_size), 'Settings are not writable private data')
     local source = assert(api.read(buffer, patch.data_size), 'Cannot read settings')
-    local table_bytes = assert(api.read(module + patch.table_rva, 148 * 8), 'Cannot read settings table')
+    local table_bytes = assert(api.read(module + patch.table_rva, 150 * 8), 'Cannot read settings table')
     assert(u32(source, 0) == patch.groups, 'Unexpected settings group count')
     local offset, records, seen, changes = 4, 0, {}, {}
     for _ = 1, patch.groups do
@@ -62,7 +63,7 @@ local function prepare(api, module)
         end
         offset = finish
     end
-    assert(offset == #source and records == 147 and #changes == 101, 'Incomplete stratagem settings')
+    assert(offset == #source and records == 149 and #changes == 103, 'Incomplete stratagem settings')
     table.sort(changes, function(a, b) return a.offset < b.offset end)
     return {buffer = buffer, source = source, pointer_bytes = pointer_bytes, changes = changes}
 end
@@ -81,7 +82,7 @@ function patch.apply(api, module)
         end
         assert(api.read(plan.buffer, patch.data_size) == expected, 'Settings verification failed')
     end)
-    if ok then return true, 'navigation_settings_ready: 101 flags; executable code unchanged' end
+    if ok then return true, 'navigation_settings_ready: 103 flags; executable code unchanged' end
     local restored = api.read(module + patch.buffer_rva, 8) == plan.pointer_bytes
     if restored then
         for index = #applied, 1, -1 do

@@ -14,6 +14,7 @@
   "cmd/hd2-resource-extract/main.go",
   "dependencies.json",
   "docs/COMPATIBILITY.md",
+  "docs/MIGRATION_VALIDATION.md",
   "docs/RELEASE_NOTES.md",
   "docs/TECHNICAL.md",
   "go.mod",
