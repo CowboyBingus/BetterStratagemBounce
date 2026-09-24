@@ -13,7 +13,7 @@ from module import build_module
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src'
 TESTS = ROOT / 'tests'
-REVISION = 'archive-v15.2'
+REVISION = 'archive-v15.3'
 INSPECTOR = Path(os.environ.get('HD2_PATCH_INSPECT', ROOT / 'tools/bin/hd2-patch-inspect.exe'))
 
 
