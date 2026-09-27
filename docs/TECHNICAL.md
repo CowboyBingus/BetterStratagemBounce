@@ -26,6 +26,6 @@ The runtime suite uses synthetic allocations to verify layout rejection, memory 
 
 With `HD2_HELLPOD_SOURCE` set, fresh LuaJIT processes test both actual Windows adapters in both initialization orders. Their FFI declarations share one VM; explicit `void *` handling avoids conflicting structure-pointer declarations. No peer source is required for a standalone build.
 
-This packaging migration is verified offline; in-game testing remains pending. Check first-impact sticking, native slope rejection, payload clearance, jammer/cooldown behavior and host/client ownership separately.
+In live play the module loads through the separate loader and applies its navigation settings. First-impact sticking, native slope rejection, payload clearance, jammer/cooldown behavior and host/client ownership need separate in-game checks.
 
 Game-module fingerprints are in `scripts/archive.py`; Wwise validation belongs to the separate loader; the native layout and expected flags are in `src/navigation_patch.lua`. They must be revalidated together when the game updates.

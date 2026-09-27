@@ -29,8 +29,8 @@ Disabling a gameplay mod removes its distinct resource. Keep the loader while an
 
 ## Verification
 
-The local candidates are Bingus Shared Loader loader-v2, Bounce archive-v15, Steering data-v7 and Reinforcement Beacons Fixed data-v3 prerelease. Tests verify distinct resource ownership, all load orders and removal subsets, optional-module failures, repeated initialization, original audio callbacks and the HUD+ update chain. Both gameplay modules retain their synthetic memory, permission and recovery tests. Manager backend verification uses isolated libraries and game folders; it does not edit live manager profiles.
+The packaging transition was tested with Bingus Shared Loader loader-v2, Bounce archive-v15, Steering data-v7 and Reinforcement Beacons Fixed data-v3 prerelease. Tests verify distinct resource ownership, all load orders and removal subsets, optional-module failures, repeated initialization, original audio callbacks and the HUD+ update chain. Both gameplay modules retain their synthetic memory, permission and recovery tests. Manager backend verification uses isolated libraries and game folders; it does not edit live manager profiles.
 
-Gameplay validation of this packaging transition remains pending. Package and startup tests do not establish jammer behavior, every terrain contact, multiplayer ownership or anti-cheat acceptance of unrelated native prototypes.
+In live play the module loads through the separate loader and applies its navigation settings. Package and startup tests do not establish jammer behavior, every terrain contact, multiplayer ownership or anti-cheat acceptance of unrelated native prototypes.
 
 Bingus Shared Loader was formerly Shared Mod Loader. Its manager GUID, API marker and module resource names remain unchanged. Install only one copy of the loader. Reinforcement multiplayer verification is pending and a small solo landing offset remains unresolved.

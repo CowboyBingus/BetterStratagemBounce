@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src'
 TESTS = ROOT / 'tests'
 REVISION = 'archive-v15.3'
+VERSION = 'v15.3.1'  # package version; the module revision is unchanged
 INSPECTOR = Path(os.environ.get('HD2_PATCH_INSPECT', ROOT / 'tools/bin/hd2-patch-inspect.exe'))
 
 
@@ -58,7 +59,7 @@ def main():
     files = {f'data/{ARCHIVE}{suffix}': f'build/{ARCHIVE}{suffix}'
              for suffix in ('', '.stream', '.gpu_resources')}
     report = {
-        'revision': revision, 'delivery': 'archive', 'runtime_verified': False,
+        'revision': revision, 'version': VERSION, 'delivery': 'archive', 'runtime_verified': False,
         'status': 'release', 'game_exe_sha256': EXE_SHA,
         'game_dll_sha256': GAME_DLL_SHA, 'deployment_files': files,
         'files': {path: sha((ROOT / path).read_bytes()) for path in files.values()},

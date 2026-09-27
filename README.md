@@ -1,23 +1,23 @@
-> Current local compatibility candidate for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; live gameplay verification is pending.
+> Release **v15.3.1** for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; in live play the mod loads and applies its stratagem navigation settings.
 
 ![Better Stratagem Bounce](assets/banner.png)
 
 # Better Stratagem Bounce
 
 > [!IMPORTANT]
-> **Bingus Shared Loader is now a separate required download.** [Download the latest loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/latest), import `Bingus-Shared-Loader-v17.zip` into Arsenal or HD2MM, and enable it alongside Better Stratagem Bounce before deploying. **This mod will not activate without the loader.** Mod managers do not install it automatically.
+> **Bingus Shared Loader is now a separate required download.** [Download the latest loader](https://github.com/CowboyBingus/BingusSharedLoader/releases/latest), import `Bingus-Shared-Loader-v18.zip` into Arsenal or HD2MM, and enable it alongside Better Stratagem Bounce before deploying. **This mod will not activate without the loader.** Mod managers do not install it automatically.
 >
 > **Arsenal (default priority): place Bingus Shared Loader LAST, at the bottom of the load order**, then **Purge → Deploy**. If you enabled first-mod priority, place the loader first instead.
 
-[Download archive-v15](https://github.com/CowboyBingus/BetterStratagemBounce/releases/tag/archive-v15)
+[Download the latest release](https://github.com/CowboyBingus/BetterStratagemBounce/releases/latest)
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away, including solid ground outside the game's navigation mesh.
 
-**Install:** Close the game, import `Bingus-Shared-Loader-v17.zip` and `Better-Stratagem-Bounce-v15.3.zip` into **HDArsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
+**Install:** Close the game, import `Bingus-Shared-Loader-v18.zip` and `Better-Stratagem-Bounce-v15.3.1.zip` into **Arsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
 
-This release is **archive-v15**, for Steam build **25480438** / EXE **1.8.46015.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
+This release is **v15.3.1**, for Steam build **25480438** / EXE **1.8.46015.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
 
-Remove older packages with bundled loaders before deploying this candidate. This package requires Bingus Shared Loader loader-v2 or newer / API 1. The loader was formerly named Shared Mod Loader; its manager GUID and API are unchanged. In-game validation of the packaging transition remains pending.
+Remove older packages with bundled loaders before deploying. This package requires Bingus Shared Loader v18 / API 1. The loader was formerly named Shared Mod Loader; its manager GUID and API are unchanged.
 
 The native slope limit remains about 45.57 degrees. Steep surfaces, vertical walls and undersides still reject the ball. Sticking does not guarantee that every payload can land in every location.
 
@@ -33,8 +33,8 @@ The new gameplay packages and Bingus Shared Loader own distinct resources and do
 
 [Build from source](CONTRIBUTING.md) · [Technical walkthrough](docs/TECHNICAL.md) · [Third-party dependencies](THIRD_PARTY.md)
 
-**AI disclosure:** GPT-6 Astra was used for research, implementation, debugging, documentation and artwork.
+**AI disclosure:** GPT-6 Astra was used for research, implementation, debugging, documentation and artwork; Claude Opus 5.5 assisted with documentation.
 
 [Release notes](docs/RELEASE_NOTES.md) · [Artwork](assets/ARTWORK.md)
 
-Current version: **v15.3**, for game build **25480438**. See [changes](CHANGELOG.md) and [validation coverage](docs/MIGRATION_VALIDATION.md).
+Current version: **v15.3.1**, for game build **25480438**. See [changes](CHANGELOG.md) and [validation coverage](docs/MIGRATION_VALIDATION.md).
