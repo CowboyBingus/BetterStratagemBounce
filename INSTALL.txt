@@ -1,14 +1,14 @@
-Better Stratagem Bounce - v15.3.1
+Better Stratagem Bounce - v15.4
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
 
 Release for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; in
-live play the mod loads and applies its stratagem navigation settings. v15.3.1
-changes only this documentation; the mod is identical to v15.3.
+live play the mod loads and applies its stratagem navigation settings. v15.4
+ran in two joined live missions.
 
 INSTALL
 1. Close Helldivers 2.
-2. Import Better-Stratagem-Bounce-v15.3.1.zip and Bingus-Shared-Loader-v18.zip
+2. Import Better-Stratagem-Bounce-v15.4.zip and Bingus-Shared-Loader-v19.zip
    into Arsenal or HD2MM. Replace any older Better Stratagem Bounce or loader
    entry rather than enabling two copies.
 3. Enable both packages. With Arsenal's default priority, place Bingus Shared
@@ -31,7 +31,8 @@ Bingus Shared Loader is the renamed Shared Mod Loader; its manager GUID is
 unchanged. Replace the old entry instead of enabling both names. Current
 Reinforcement Beacons Fixed is an optional separate module.
 
-Requires Bingus Shared Loader v18 (API 1): https://github.com/CowboyBingus/BingusSharedLoader/releases/latest
+Requires Bingus Shared Loader v18 or newer (API 1; v19 is current):
+https://github.com/CowboyBingus/BingusSharedLoader/releases/latest
 Supported: Steam build 25480438 / EXE 1.8.46015.0.
 Log: %LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs/BetterStratagemBounce.log
 

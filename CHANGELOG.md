@@ -1,3 +1,13 @@
+# v15.4
+
+- The one-time settings check at the first update builds its expected bytes once instead of once per changed flag, cutting that frame's short-lived Lua strings from about 16 MB to about 0.6 MB. A test keeps it under 2 MB.
+- The same one-time settings change checks memory protection once for the whole settings buffer instead of 104 times. In game each check costs about 0.3 ms.
+- Works alongside mods that change other stratagem navigation flags or already cleared the same one: it checks and changes only its own bit instead of stopping when any flag byte differs. After a failed write it puts back only that bit.
+- Calls Windows through Bingus Shared Runtime v1 under private, versioned names, so another mod's declarations of the same Windows functions can no longer change this mod's calls. Each game module's hash is read once per session for every mod that uses the runtime.
+- Requires Bingus Shared Loader v18 or newer (v19 is current).
+- Now licensed under the Zero-Clause BSD license (0BSD).
+- Measured in live play: 0.001 ms per frame in missions and 0.001 ms on the ship.
+
 # v15.3.1
 
 - Documentation-only release: the mod is identical to v15.3 (same compiled resource).

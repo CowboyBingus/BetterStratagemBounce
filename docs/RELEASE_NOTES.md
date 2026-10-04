@@ -1,3 +1,5 @@
-- Documentation-only release: the mod is identical to v15.3 (same compiled resource).
-- Rewrites the install notes packaged with the mod and the README status: one current status line instead of the compatibility-candidate and test-build notes left from the game-build update. In live play the mod loads and applies its stratagem navigation settings.
-- Lists one loader requirement, Bingus Shared Loader v18.
+- Works alongside mods that change other stratagem navigation flags: it now checks and changes only its own bit instead of stopping.
+- The one-time settings change at startup makes one memory protection check instead of 104 and far less temporary memory.
+- Other mods' Windows declarations can no longer change this mod's calls.
+- Requires Bingus Shared Loader v18 or newer (v19 is current).
+- Measured in live play: 0.001 ms per frame in missions and 0.001 on the ship.
