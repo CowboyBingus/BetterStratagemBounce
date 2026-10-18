@@ -1,4 +1,4 @@
-> Release **v15.4** for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; in live play the mod loads and applies its stratagem navigation settings.
+> Release **v15.4.1** for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; in live play the mod loads and applies its stratagem navigation settings.
 
 ![Better Stratagem Bounce](assets/banner.png)
 
@@ -13,9 +13,9 @@
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away, including solid ground outside the game's navigation mesh.
 
-**Install:** Close the game, import `Bingus-Shared-Loader-v19.zip` and `Better-Stratagem-Bounce-v15.4.zip` into **Arsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
+**Install:** Close the game, import `Bingus-Shared-Loader-v19.zip` and `Better-Stratagem-Bounce-v15.4.1.zip` into **Arsenal** or **HD2MM**, enable both, and deploy. The loader is a required separate download; managers do not install it automatically. Use one manager. See [upgrading and uninstalling](INSTALL.txt).
 
-This release is **v15.4**, for Steam build **25480438** / EXE **1.8.46015.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
+This release is **v15.4.1**, for Steam build **25480438** / EXE **1.8.46015.0**. It contains only this gameplay module. Bingus Shared Loader owns the startup code, so later loader updates require replacing just the loader package. Other gameplay mods are optional.
 
 Remove older packages with bundled loaders before deploying. This package requires Bingus Shared Loader v18 or newer / API 1 (v19 is current). The loader was formerly named Shared Mod Loader; its manager GUID and API are unchanged.
 
@@ -37,7 +37,7 @@ The new gameplay packages and Bingus Shared Loader own distinct resources and do
 
 [Release notes](docs/RELEASE_NOTES.md) · [Artwork](assets/ARTWORK.md)
 
-Current version: **v15.4**, for game build **25480438**. See [changes](CHANGELOG.md) and [validation coverage](docs/MIGRATION_VALIDATION.md).
+Current version: **v15.4.1**, for game build **25480438**. See [changes](CHANGELOG.md) and [validation coverage](docs/MIGRATION_VALIDATION.md).
 
 ## License
 

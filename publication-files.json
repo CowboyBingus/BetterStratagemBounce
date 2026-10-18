@@ -35,6 +35,7 @@
   "src/windows_api.lua",
   "tests/frame_budget.lua",
   "tests/hostile_vm.lua",
+  "tests/reference/archive_loader.lua",
   "tests/test_archive.lua",
   "tests/test_package.py",
   "tests/test_windows_interop.lua"

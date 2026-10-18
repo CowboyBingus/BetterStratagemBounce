@@ -1,4 +1,4 @@
-Better Stratagem Bounce - v15.4
+Better Stratagem Bounce - v15.4.1
 
 Lets stratagem balls stick and activate on more surfaces instead of bouncing away.
 
@@ -8,7 +8,7 @@ ran in two joined live missions.
 
 INSTALL
 1. Close Helldivers 2.
-2. Import Better-Stratagem-Bounce-v15.4.zip and Bingus-Shared-Loader-v19.zip
+2. Import Better-Stratagem-Bounce-v15.4.1.zip and Bingus-Shared-Loader-v19.zip
    into Arsenal or HD2MM. Replace any older Better Stratagem Bounce or loader
    entry rather than enabling two copies.
 3. Enable both packages. With Arsenal's default priority, place Bingus Shared

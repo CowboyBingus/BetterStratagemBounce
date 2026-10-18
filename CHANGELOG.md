@@ -1,3 +1,7 @@
+# v15.4.1
+
+- The mod's per-frame code no longer makes the game's Lua compiler retry compiling it every frame; such retries from many mods kept the game recompiling indefinitely.
+
 # v15.4
 
 - The one-time settings check at the first update builds its expected bytes once instead of once per changed flag, cutting that frame's short-lived Lua strings from about 16 MB to about 0.6 MB. A test keeps it under 2 MB.
