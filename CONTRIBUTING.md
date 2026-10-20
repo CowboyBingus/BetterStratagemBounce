@@ -69,4 +69,4 @@ Offline checks do not replace gameplay checks. Check ordinary ground, off-naviga
 
 Commit authored source, tests, dependency pins and the two images. Generated files and local dependencies are ignored. Review staged content and history before publishing; use the CowboyBingus GitHub noreply identity rather than a personal email. Publish release ZIPs separately from source.
 
-For this release preparation, a clean allowlisted source snapshot is exported separately from the working repository. Keep local research, generated outputs, manager profiles and prior Git history outside the upload. No repository-wide license has been selected.
+For this release preparation, a clean allowlisted source snapshot is exported separately from the working repository. Keep local research, generated outputs, manager profiles and prior Git history outside the upload. This repository is licensed under the BSD Zero Clause License (0BSD); see LICENSE.
